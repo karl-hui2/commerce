@@ -1,0 +1,21 @@
+.feature-section {
+    & > div {
+      display: flex;
+  
+      @media screen and (max-width: 767px) {
+        width: 100% !important;
+        margin-bottom: 2rem;
+      }
+  
+      &:last-child {
+        @media screen and (max-width: 767px) {
+          margin-bottom: 0;
+        }
+      }
+  
+      div {
+        justify-content: space-between;
+      }
+    }
+  }
+  
