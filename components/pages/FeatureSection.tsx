@@ -25,26 +25,43 @@ export function FeatureSection({
 }) {
   // Animation variants for the container
   const containerVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: '5%' }, // Matches original distance="5%"
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1, // Matches original duration={1000}
+        delay: i % 2 !== 0 ? 0.4 : 0, // Matches original delay={i % 2 !== 0 ? 400 : 0}
+        ease: 'easeOut',
+      },
+    }),
+  }
+
+  // Animation variants for the title (Fade bottom)
+  const titleVariants = {
+    hidden: { opacity: 0, y: '12%' }, // Matches original distance="12%"
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 1,
-        delay: 0.4,
-        when: 'beforeChildren', // Animate children after the parent
-        staggerChildren: 0.3, // Stagger animations of children
+        duration: 1.5, // Matches original duration={1500}
+        delay: 0.1, // Matches original delay={100}
+        ease: 'easeOut',
       },
     },
   }
 
-  // Animation variants for the title and description
-  const textVariants = {
-    hidden: { opacity: 0, y: 20 },
+  // Animation variants for the description (Fade top)
+  const descriptionVariants = {
+    hidden: { opacity: 0, y: '-12%' }, // Matches original distance="12%" but negative for top
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 1.5, ease: 'easeOut' },
+      transition: {
+        duration: 1.5, // Matches original duration={1500}
+        delay: 0.1, // Matches original delay={100}
+        ease: 'easeOut',
+      },
     },
   }
 
@@ -66,10 +83,11 @@ export function FeatureSection({
             style={{
               width: _isFullWidth ? '100%' : 'calc(50% - 1rem)',
             }}
+            custom={i} // Pass index to use in delay calculation
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }} // Trigger animation when 20% of the element is in view
+            viewport={{ once: true, amount: 0.2 }}
           >
             <div
               className={`relative isolate overflow-hidden shadow-2xl rounded-2xl flex ${
@@ -87,7 +105,7 @@ export function FeatureSection({
                     className={`text-5xl font-bold tracking-tight sm:text-5xl ${
                       _isDark ? 'text-white' : ''
                     }`}
-                    variants={textVariants}
+                    variants={titleVariants}
                   >
                     {feature.title}
                   </motion.h2>
@@ -96,7 +114,7 @@ export function FeatureSection({
                     className={`mt-6 text-lg leading-8 ${
                       _isDark ? 'text-gray-300' : 'text-gray-500'
                     }`}
-                    variants={textVariants}
+                    variants={descriptionVariants}
                   >
                     {feature.description}
                   </motion.div>
