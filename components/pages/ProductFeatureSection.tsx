@@ -25,7 +25,7 @@ export function ProductFeatureSection({
                 className={`flex flex-col text-center w-full md:w-1/2 ${
                   oddNumberOfItems ? 'lg:w-1/3' : 'lg:w-1/4'
                 } px-6 p-12 flex-grow`}
-                key={`pfs-${product.buyNowLink}`}
+                key={`pfs-${product.buyNowLink}-${i}`}
               >
                 <Image
                   src={product.image}
