@@ -1,3 +1,5 @@
+'use client'
+
 import { motion } from 'framer-motion'
 import { StaticImageData } from 'next/image'
 import Link from 'next/link'
@@ -15,7 +17,7 @@ export default function HalfBox({
 }: {
   image: StaticImageData
   delay: number
-  title: React.ReactNode
+  title?: React.ReactNode
   description: React.ReactNode
   buyNowLink?: string
   learnMoreLink?: string
